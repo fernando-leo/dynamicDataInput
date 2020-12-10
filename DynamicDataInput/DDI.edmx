@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DDIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DDI.dbo.DATA_TABLE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DATA_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PROJECT_ID" />
+            <PropertyRef Name="DATA_ORDER" />
+            <PropertyRef Name="DATA_NAME" />
+            <PropertyRef Name="DATA_TYPE" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DATA_ORDER" Type="int" Nullable="false" />
+          <Property Name="DATA_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DATA_OPTIONS" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DDI.dbo.PROJECT_TABLE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PROJECT_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PROJECT_NAME" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PROJECT_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DDIModelStoreContainer">
+          <EntitySet Name="DATA_TABLE" EntityType="Self.DATA_TABLE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DATA_TABLE].[ID] AS [ID], 
+    [DATA_TABLE].[PROJECT_ID] AS [PROJECT_ID], 
+    [DATA_TABLE].[DATA_ORDER] AS [DATA_ORDER], 
+    [DATA_TABLE].[DATA_NAME] AS [DATA_NAME], 
+    [DATA_TABLE].[DATA_TYPE] AS [DATA_TYPE], 
+    [DATA_TABLE].[DATA_OPTIONS] AS [DATA_OPTIONS]
+    FROM [dbo].[DATA_TABLE] AS [DATA_TABLE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PROJECT_TABLE" EntityType="Self.PROJECT_TABLE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PROJECT_TABLE].[ID] AS [ID], 
+    [PROJECT_TABLE].[PROJECT_NAME] AS [PROJECT_NAME]
+    FROM [dbo].[PROJECT_TABLE] AS [PROJECT_TABLE]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DDIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DATA_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PROJECT_ID" />
+            <PropertyRef Name="DATA_ORDER" />
+            <PropertyRef Name="DATA_NAME" />
+            <PropertyRef Name="DATA_TYPE" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="PROJECT_ID" Type="Guid" Nullable="false" />
+          <Property Name="DATA_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="DATA_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATA_OPTIONS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PROJECT_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PROJECT_NAME" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="PROJECT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DDIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DATA_TABLE" EntityType="Self.DATA_TABLE" />
+          <EntitySet Name="PROJECT_TABLE" EntityType="Self.PROJECT_TABLE" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DDIModelStoreContainer" CdmEntityContainer="DDIEntities">
+          <EntitySetMapping Name="DATA_TABLE">
+            <EntityTypeMapping TypeName="DDIModel.DATA_TABLE">
+              <MappingFragment StoreEntitySet="DATA_TABLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PROJECT_ID" ColumnName="PROJECT_ID" />
+                <ScalarProperty Name="DATA_ORDER" ColumnName="DATA_ORDER" />
+                <ScalarProperty Name="DATA_NAME" ColumnName="DATA_NAME" />
+                <ScalarProperty Name="DATA_TYPE" ColumnName="DATA_TYPE" />
+                <ScalarProperty Name="DATA_OPTIONS" ColumnName="DATA_OPTIONS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROJECT_TABLE">
+            <EntityTypeMapping TypeName="DDIModel.PROJECT_TABLE">
+              <MappingFragment StoreEntitySet="PROJECT_TABLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PROJECT_NAME" ColumnName="PROJECT_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
